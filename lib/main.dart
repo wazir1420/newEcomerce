@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myecommerceapp/views/explore_view.dart';
+import 'package:myecommerceapp/views/message_view.dart';
 import 'package:myecommerceapp/views/splash_view.dart';
 
 void main() {
@@ -10,9 +12,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Splash(),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: ExploreView());
   }
 }

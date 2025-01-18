@@ -108,7 +108,7 @@ class LoginView extends StatelessWidget {
                           borderSide: BorderSide.none),
                       hintText: 'Password',
                     ),
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.visiblePassword,
                   ),
                   SizedBox(
                     height: he * 0.01,

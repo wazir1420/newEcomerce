@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myecommerceapp/viewmodels/login_viewmodel.dart';
+import 'package:myecommerceapp/viewmodels/signup_viewmodel.dart';
 import 'package:myecommerceapp/views/login_view.dart';
 import 'package:stacked/stacked.dart';
 
@@ -11,8 +11,8 @@ class SignUpView extends StatelessWidget {
     double he = MediaQuery.of(context).size.height;
     double we = MediaQuery.of(context).size.width;
 
-    return ViewModelBuilder<LoginViewModel>.reactive(
-        viewModelBuilder: () => LoginViewModel(),
+    return ViewModelBuilder<SignUpViewModel>.reactive(
+        viewModelBuilder: () => SignUpViewModel(),
         builder: (context, viewModel, child) {
           return Scaffold(
             body: SafeArea(
