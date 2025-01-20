@@ -1,201 +1,412 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
+import 'package:myecommerceapp/viewmodels/message_viewmodel.dart';
+import 'package:stacked/stacked.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
-  late int currentPage;
-  late TabController tabController;
-  late ScrollController _scrollController; // Define ScrollController
-  final List<Color> colors = [
-    Colors.yellow,
-    Colors.red,
-    Colors.green,
-    Colors.blue,
-    Colors.pink
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    currentPage = 0;
-    tabController = TabController(length: 5, vsync: this);
-    _scrollController = ScrollController(); // Initialize ScrollController
-
-    tabController.animation!.addListener(() {
-      final value = tabController.animation!.value.round();
-      if (value != currentPage && mounted) {
-        changePage(value);
-      }
-    });
-  }
-
-  void changePage(int newPage) {
-    setState(() {
-      currentPage = newPage;
-    });
-  }
-
-  @override
-  void dispose() {
-    tabController.dispose();
-    _scrollController.dispose(); // Dispose of the ScrollController
-    super.dispose();
-  }
+class MessageView extends StatelessWidget {
+  const MessageView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Color unselectedColor = colors[currentPage].computeLuminance() < 0.5
-        ? Colors.black
-        : Colors.white;
+    double he = MediaQuery.of(context).size.height;
+    double we = MediaQuery.of(context).size.width;
+    return ViewModelBuilder<MessageViewModel>.reactive(
+        viewModelBuilder: () => MessageViewModel(),
+        builder: (context, viewModel, child) {
+          return Scaffold(
+            body: SafeArea(
+                child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Stack(children: [
+                SingleChildScrollView(
+                  child: Column(
+                    spacing: he * 0.01,
+                    children: [
+                      SizedBox(
+                        height: he * 0.02,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                border:
+                                    Border.all(color: Colors.black, width: 1),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.arrow_back_ios,
+                                    size: 20,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: we * 0.05),
+                            Text(
+                              'Messages',
+                              style:
+                                  TextStyle(fontSize: 28, fontFamily: 'Dosis'),
+                            ),
+                            SizedBox(width: we * 0.3),
+                            Icon(
+                              Icons.menu,
+                              size: 35,
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: he * 0.02,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          fillColor: Colors.grey.shade300,
+                          filled: true,
+                          suffixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none,
+                          ),
+                          hintText: 'Search in messages',
+                        ),
+                        keyboardType: TextInputType.text,
+                      ),
+                      SizedBox(
+                        height: he * 0.01,
+                      ),
+                      customMessage(
+                        context,
+                        'assets/images/mera.jpg',
+                        'DJI Mavic mini 2',
+                        'Wazir Tatheer',
+                        'You: Does it come with an',
+                        '9:03 AM',
+                        Colors.grey.shade500,
+                        Colors.grey.shade500,
+                        Colors.green,
+                        text2: 'additional battery?',
+                      ),
+                      customMessage(
+                          context,
+                          'assets/images/girla.jpg',
+                          'DJI Mavir Air 2',
+                          'Petey Cruiser',
+                          'You: Yes it is but tell first',
+                          '9:03 AM',
+                          Colors.black,
+                          Colors.black,
+                          Colors.green,
+                          number: '2',
+                          conColor: Colors.red,
+                          fontweigt: FontWeight.bold,
+                          text2: 'wazir'),
+                      customMessage(
+                        context,
+                        'assets/images/girlb.png',
+                        'DJI Mavir Air 1',
+                        'Anna Sthesia',
+                        'You: I think you should go to mavic ',
+                        '9:03 AM',
+                        Colors.grey.shade500,
+                        Colors.grey.shade500,
+                        Colors.grey.shade400,
+                        text2: 'mini',
+                      ),
+                      customMessage(
+                        context,
+                        'assets/images/boy1.jpg',
+                        'Apple Airpods Pro',
+                        'Bob Frapples',
+                        "Bob: You're welcome",
+                        '9:03 AM',
+                        Colors.grey.shade500,
+                        Colors.grey.shade500,
+                        Colors.green,
+                        text2: 'dear!',
+                      ),
+                      customMessage(
+                          context,
+                          'assets/images/girle.jpg',
+                          'JBL Charge 2 Spea...',
+                          'Greta Life',
+                          "Greta: Alright",
+                          '9:03 AM',
+                          Colors.black,
+                          Colors.black,
+                          Colors.grey.shade400,
+                          text2: 'dear!',
+                          number: '1',
+                          fontweigt: FontWeight.bold,
+                          conColor: Colors.red),
+                      customMessage(
+                        context,
+                        'assets/images/agha.jpg',
+                        'Audionic Speaker',
+                        'Agha Ijju',
+                        'Ijju: How much you want to ',
+                        '9:03 AM',
+                        Colors.grey.shade500,
+                        Colors.grey.shade500,
+                        Colors.green,
+                        text2: 'give',
+                      ),
+                      customMessage(
+                        context,
+                        'assets/images/girlf.jpg',
+                        'Macbook Pro 2021',
+                        'Antonia',
+                        'You: Hey are you',
+                        '9:03 AM',
+                        Colors.grey.shade500,
+                        Colors.grey.shade500,
+                        Colors.grey.shade400,
+                        text2: 'there?',
+                      ),
+                      SizedBox(
+                        height: 50,
+                      )
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 15,
+                  child: Container(
+                    height: 50,
+                    width: we * 0.9245,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.black,
+                    ),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            viewModel.updateSelectedIndex(0);
+                          },
+                          icon: Container(
+                            height: 40,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: viewModel.selectedIndex == 0
+                                    ? const Color(0xFF087E8B)
+                                    : Colors.black),
+                            child: Icon(
+                              Icons.home_outlined,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            viewModel.updateSelectedIndex(1);
+                          },
+                          icon: Container(
+                            height: 40,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: viewModel.selectedIndex == 1
+                                    ? const Color(0xFF087E8B)
+                                    : Colors.black),
+                            child: Icon(
+                              Icons.explore_outlined,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 70),
+                        IconButton(
+                          onPressed: () {
+                            viewModel.updateSelectedIndex(2);
+                          },
+                          icon: Container(
+                            height: 40,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: viewModel.selectedIndex == 2
+                                    ? const Color(0xFF087E8B)
+                                    : Colors.black),
+                            child: Icon(
+                              Icons.favorite_border_outlined,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            viewModel.updateSelectedIndex(3);
+                          },
+                          icon: Container(
+                            height: 40,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: viewModel.selectedIndex == 3
+                                    ? const Color(0xFF087E8B)
+                                    : Colors.black),
+                            child: Icon(
+                              Icons.message_outlined,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 10,
+                  left: 10,
+                  right: 10,
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black87, width: 3),
+                    ),
+                    child: Icon(
+                      Icons.camera_alt_outlined,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ]),
+            )),
+          );
+        });
+  }
+}
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          backgroundColor: Colors.black,
+Widget customMessage(
+  BuildContext context,
+  String image,
+  String model,
+  String name,
+  String text1,
+  String time,
+  Color color1,
+  Color color2,
+  Color color, {
+  String? number,
+  String? text2,
+  Color? conColor,
+  FontWeight? fontweigt,
+}) {
+  double he = MediaQuery.of(context).size.height;
+  double we = MediaQuery.of(context).size.width;
+
+  return Stack(
+    children: [
+      Container(
+        height: he * 0.13,
+        width: we * 1,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.white,
         ),
-        body: BottomBar(
-          child: TabBar(
-            indicatorPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
-            controller: tabController,
-            indicator: UnderlineTabIndicator(
-              borderSide: BorderSide(
-                color: currentPage == 0
-                    ? colors[0]
-                    : currentPage == 1
-                        ? colors[1]
-                        : currentPage == 2
-                            ? colors[2]
-                            : currentPage == 3
-                                ? colors[3]
-                                : currentPage == 4
-                                    ? colors[4]
-                                    : unselectedColor,
-                width: 4,
-              ),
-              insets: EdgeInsets.fromLTRB(16, 0, 16, 8),
+        child: Row(
+          children: [
+            SizedBox(width: 20),
+            CircleAvatar(
+              backgroundImage: AssetImage(image),
+              radius: 35,
             ),
-            tabs: [
-              SizedBox(
-                height: 55,
-                width: 40,
-                child: Center(
-                    child: Icon(
-                  Icons.home,
-                  color: currentPage == 0 ? colors[0] : unselectedColor,
-                )),
-              ),
-              SizedBox(
-                height: 55,
-                width: 40,
-                child: Center(
-                    child: Icon(
-                  Icons.search,
-                  color: currentPage == 1 ? colors[1] : unselectedColor,
-                )),
-              ),
-              SizedBox(
-                height: 55,
-                width: 40,
-                child: Center(
-                    child: Icon(
-                  Icons.add,
-                  color: currentPage == 2 ? colors[2] : unselectedColor,
-                )),
-              ),
-              SizedBox(
-                height: 55,
-                width: 40,
-                child: Center(
-                    child: Icon(
-                  Icons.favorite,
-                  color: currentPage == 3 ? colors[3] : unselectedColor,
-                )),
-              ),
-              SizedBox(
-                height: 55,
-                width: 40,
-                child: Center(
-                    child: Icon(
-                  Icons.settings,
-                  color: currentPage == 4 ? colors[4] : unselectedColor,
-                )),
-              ),
-            ],
-          ),
-          fit: StackFit.expand,
-          icon: (width, height) => Center(
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: null,
-              icon: Icon(
-                Icons.arrow_upward_rounded,
-                color: unselectedColor,
-                size: width,
+            SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Text(
+                        model,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        ' | $name',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey.shade500,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    text1,
+                    style: TextStyle(
+                        fontSize: 13, color: color1, fontWeight: fontweigt),
+                  ),
+                  if (text2 != null && text2.isNotEmpty)
+                    Text(
+                      text2,
+                      style: TextStyle(
+                          fontSize: 13, color: color2, fontWeight: fontweigt),
+                    ),
+                  SizedBox(
+                    width: 250,
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        time,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-          borderRadius: BorderRadius.circular(500),
-          duration: Duration(seconds: 1),
-          curve: Curves.decelerate,
-          showIcon: true,
-          width: MediaQuery.of(context).size.width * 0.8,
-          barColor: colors[currentPage].computeLuminance() > 0.5
-              ? Colors.black
-              : Colors.white,
-          start: 2,
-          end: 0,
-          offset: 10,
-          barAlignment: Alignment.bottomCenter,
-          iconHeight: 35,
-          iconWidth: 35,
-          reverse: false,
-          hideOnScroll: true,
-          scrollOpposite: false,
-          onBottomBarHidden: () {},
-          onBottomBarShown: () {},
-          body: (context, controller) => TabBarView(
-            controller: tabController,
-            dragStartBehavior: DragStartBehavior.down,
-            physics: const BouncingScrollPhysics(),
-            children: colors
-                .map((e) =>
-                    InfiniteListPage(controller: _scrollController, color: e))
-                .toList(),
-          ),
+          ],
         ),
       ),
-    );
-  }
-}
-
-class InfiniteListPage extends StatelessWidget {
-  final ScrollController controller;
-  final Color color;
-
-  InfiniteListPage({required this.controller, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      controller: controller,
-      itemCount: 50, // Modify based on your data or infinite scrolling logic
-      itemBuilder: (context, index) {
-        return Container(
-          color: color,
-          height: 100, // Adjust item height
-          child: Center(child: Text('Item $index')),
-        );
-      },
-    );
-  }
+      Positioned(
+        top: 73,
+        left: 71,
+        child: Container(
+          height: 15,
+          width: 15,
+          decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+        ),
+      ),
+      if (number != null)
+        Positioned(
+          top: 50,
+          left: 330,
+          child: Container(
+            height: 25,
+            width: 25,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: conColor),
+            child: Center(
+                child: Text(
+              number,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13),
+            )),
+          ),
+        )
+    ],
+  );
 }
