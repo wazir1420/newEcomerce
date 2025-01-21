@@ -181,7 +181,7 @@ class MessageView extends StatelessWidget {
                     width: we * 0.9245,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: Colors.black,
+                      color: Colors.black87,
                     ),
                     child: Row(
                       children: [
@@ -196,7 +196,7 @@ class MessageView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                                 color: viewModel.selectedIndex == 0
                                     ? const Color(0xFF087E8B)
-                                    : Colors.black),
+                                    : Colors.black12),
                             child: Icon(
                               Icons.home_outlined,
                               size: 25,
@@ -215,7 +215,7 @@ class MessageView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                                 color: viewModel.selectedIndex == 1
                                     ? const Color(0xFF087E8B)
-                                    : Colors.black),
+                                    : Colors.black12),
                             child: Icon(
                               Icons.explore_outlined,
                               size: 25,
@@ -235,7 +235,7 @@ class MessageView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                                 color: viewModel.selectedIndex == 2
                                     ? const Color(0xFF087E8B)
-                                    : Colors.black),
+                                    : Colors.black12),
                             child: Icon(
                               Icons.favorite_border_outlined,
                               size: 25,
@@ -254,7 +254,7 @@ class MessageView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                                 color: viewModel.selectedIndex == 3
                                     ? const Color(0xFF087E8B)
-                                    : Colors.black),
+                                    : Colors.black12),
                             child: Icon(
                               Icons.message_outlined,
                               size: 25,
