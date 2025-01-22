@@ -28,6 +28,7 @@ class ProductView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             GestureDetector(
                               onTap: () {},
@@ -50,9 +51,6 @@ class ProductView extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              width: we * 0.5,
                             ),
                             Text(
                               'ReBuy',
@@ -296,7 +294,7 @@ class ProductView extends StatelessWidget {
                 ],
               ),
             )),
-            bottomNavigationBar: Container(
+            bottomNavigationBar: SizedBox(
               height: 60,
               child: Row(
                 children: [

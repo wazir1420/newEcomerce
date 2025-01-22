@@ -336,6 +336,7 @@ Widget productContainer(BuildContext context,
         color: Colors.white,
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.2),
             offset: Offset(0, 0),
           ),

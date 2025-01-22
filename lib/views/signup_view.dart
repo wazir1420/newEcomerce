@@ -9,7 +9,6 @@ class SignUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double he = MediaQuery.of(context).size.height;
-    double we = MediaQuery.of(context).size.width;
 
     return ViewModelBuilder<SignUpViewModel>.reactive(
         viewModelBuilder: () => SignUpViewModel(),
@@ -25,6 +24,7 @@ class SignUpView extends StatelessWidget {
                     height: he * 0.03,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
                         onTap: () {},
@@ -46,9 +46,6 @@ class SignUpView extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: we * 0.5,
                       ),
                       Text(
                         'ReBuy',

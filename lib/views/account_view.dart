@@ -184,6 +184,7 @@ class AccountView extends StatelessWidget {
                             hintText:
                                 'House No 378A\nStreet No 14\nSector I Manzoor\nColony Karachi',
                             hintStyle: TextStyle(
+                              // ignore: deprecated_member_use
                               color: Colors.black.withOpacity(0.6),
                               fontSize: 16,
                             ),
