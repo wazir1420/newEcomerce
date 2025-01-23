@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myecommerceapp/views/like_view.dart';
+import 'package:myecommerceapp/views/order_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,6 +10,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: LikeView());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: OrderView());
   }
 }
